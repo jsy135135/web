@@ -45,3 +45,10 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+#Netbeans dir logs
+nbproject
+
+# Thinkphp logs and runtime datas
+Application/Runtime
+Application/*/Conf/
