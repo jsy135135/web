@@ -51,4 +51,4 @@ nbproject
 
 # Thinkphp logs and runtime datas
 Application/Runtime
-Application/*/Conf/
+Application/Common/Conf/
