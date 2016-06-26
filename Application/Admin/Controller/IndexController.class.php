@@ -4,7 +4,7 @@ namespace Admin\Controller;
 
 use Think\Controller;
 
-class IndexController extends Controller {
+class IndexController extends CommonController {
 
     //加载管理后台首页
     public function index() {
