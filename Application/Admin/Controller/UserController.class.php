@@ -25,4 +25,19 @@ class UserController extends Controller {
 			$this->display();
 		}
 	}
+	//展示用户
+	public function userList(){
+	  $User = M('user');
+	  $UserList = $User->select();
+	  $this->assign('Userlist',$UserList);
+	  $this->display();
+	}
+	//删除用户
+	public function delUser(){
+		// $id = I('post.id');
+		// $User = M('user');
+		// $
+		// $rs = $User->
+
+	}
 }
