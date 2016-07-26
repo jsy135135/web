@@ -14,11 +14,21 @@ class LoginController extends Controller {
         session(null);
         $this->success('退出登录',U('Login/index'),3);
     }
+    //生成验证码
+    public function verify(){
+        $Verify = new \Think\Verify();
+        $Verify->useImgBg = true;
+        $Verify->entry();
+    }
     //检测登陆
     public function checkLogin(){
     	$UserModel = M('user');
     	// echo '这里我是来进行登录权限认证的';
-    	$data = $_POST;
+        //判断验证码是否正确
+        if($this->check_verify(I('post.verify')) === false){
+            $this->error('验证码输入错误，请重新输入~！',U('Login/index'),3);
+        }
+        $data['username'] = I('post.username');
     	$data['password'] = md5(I('post.password'));
     	$data['time'] = time();
     	$data = $UserModel->create($data);
@@ -48,5 +58,9 @@ class LoginController extends Controller {
     // 		$this->error('登录失败/(ㄒoㄒ)/~~,请重新登录',U('Login/index'),3);
     // 	}
     // }
-
+    // 检测输入的验证码是否正确，$code为用户输入的验证码字符串
+    function check_verify($code, $id = ''){
+        $verify = new \Think\Verify();
+        return $verify->check($code, $id);
+    }
 }
