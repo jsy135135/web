@@ -17,7 +17,8 @@ class LoginController extends Controller {
     //生成验证码
     public function verify(){
         $Verify = new \Think\Verify();
-        $Verify->useImgBg = true;
+        // $Verify->useImgBg = true;
+        $Verify->useNoise = false;
         $Verify->entry();
     }
     //检测登陆
