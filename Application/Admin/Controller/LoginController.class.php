@@ -31,7 +31,8 @@ class LoginController extends Controller {
         }
         $data['username'] = I('post.username');
     	$data['password'] = md5(I('post.password'));
-    	$data['time'] = time();
+    	$data['time'] = date('Y-m-d H:i:s');
+        $data['ip'] = get_client_ip();
     	$data = $UserModel->create($data);
     	$rs = $UserModel->where("username = '".$data['username']."' AND password = '".$data['password']."'")->find();
         // echo $UserModel->getLastSql();die();
@@ -40,6 +41,8 @@ class LoginController extends Controller {
             session('username',$rs['username']);
             session('uid',$rs['id']);
             session('remark',$rs['remark']);
+            //修改最后登录时间和ip
+            $UserModel->where("username = '".$data['username']."' AND password = '".$data['password']."'")->save(array('last_login_time'=>$data['time'],'ip'=>$data['ip']));
     	}else{
     		$this->error('登录失败/(ㄒoㄒ)/~~,请重新登录！',U('Login/index'),3);
     	}

@@ -29,7 +29,7 @@ class UserController extends Controller {
 	public function userList(){
 	  $User = M('user');
 	  $UserList = $User->select();
-	  $this->assign('Userlist',$UserList);
+	  $this->assign('userList',$UserList);
 	  $this->display();
 	}
 	//删除用户
